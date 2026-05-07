@@ -1,27 +1,37 @@
-import pytesseract
-from PIL import Image
-import re
+"""
+OCR Module — Future Work
 
-# IMPORTANT: If Tesseract is not in your system's PATH (especially on Windows), 
-# uncomment the following line and provide the absolute path to tesseract.exe:
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+This module is intentionally left as a stub.
+OCR-based ingredient extraction (using pytesseract / Tesseract OCR) is left as future work.
+
+In the current pipeline, users provide the ingredient text directly via:
+  - CLI:  python app.py --text "ingredient list here"
+  - UI:   Streamlit text area input
+
+When implementing OCR in the future, this module should:
+  1. Accept an image path as input.
+  2. Preprocess the image (grayscale, denoise, threshold) for better OCR accuracy.
+  3. Run pytesseract.image_to_string() on the image.
+  4. Clean and normalize the extracted text.
+  5. Return the cleaned text string for downstream processing.
+
+Example (not active):
+    import pytesseract
+    from PIL import Image
+
+    def extract_text_from_image(image_path: str) -> str:
+        img = Image.open(image_path)
+        text = pytesseract.image_to_string(img).lower()
+        return text.strip()
+"""
+
 
 def extract_text_from_image(image_path: str) -> str:
     """
-    Extracts ingredient text from a food product image using Tesseract OCR.
+    Stub function — OCR is not active in the current pipeline.
+    Raises NotImplementedError to make the intent explicit.
     """
-    try:
-        # Load the image
-        img = Image.open(image_path)
-        
-        # Extract text using pytesseract
-        text = pytesseract.image_to_string(img)
-        
-        # Basic cleaning: convert to lowercase and remove excessive whitespaces/newlines
-        clean_text = text.lower()
-        clean_text = re.sub(r'\s+', ' ', clean_text).strip()
-        
-        return clean_text
-    except Exception as e:
-        print(f"Error extracting text from {image_path}: {e}")
-        return ""
+    raise NotImplementedError(
+        "OCR integration is left as future work. "
+        "Please provide ingredient text directly using --text or the Streamlit UI."
+    )

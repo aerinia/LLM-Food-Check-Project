@@ -1,0 +1,25 @@
+{
+    "ingredients": "buğday unu, %24 oranında tam buğday unu, bitkisel yağ (palm, ayçiçek, pamuk, kanola), şeker, pastörize yumurta, malt ekstrakt, kabartıcılar, invert şeker şurubu, peynir altı suyu tozu, yağsız süt tozu, kepek, tuz ve aroma verici",
+    "vegan": "no",
+    "allergens": [
+        "milk",
+        "gluten",
+        "eggs"
+    ],
+    "explanation": "The product is not vegan due to the presence of non-vegan ingredients pastörize yumurta, peynir altı suyu tozu, and yağsız süt tozu.",
+    "reasoning_steps": [
+        "1. buğday unu (wheat flour): clearly vegan",
+        "2. %24 oranında tam buğday unu (whole wheat flour): clearly vegan",
+        "3. bitkisel yağ (palm, ayçiçek, pamuk, kanola): clearly vegan",
+        "4. şeker (sugar): clearly vegan",
+        "5. pastörize yumurta (pasteurized egg): non-vegan",
+        "6. malt ekstrakt: ambiguous/possibly animal-derived",
+        "7. kabartıcılar: ambiguous/possibly animal-derived",
+        "8. invert şeker şurubu: clearly vegan",
+        "9. peynir altı suyu tozu (whey powder): non-vegan",
+        "10. yağsız süt tozu (non-fat milk powder): non-vegan",
+        "11. kepek: ambiguous/possibly animal-derived",
+        "12. tuz: clearly vegan",
+        "13. aroma verici: unclear, possible animal-derived"
+    ]
+}

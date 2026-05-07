@@ -1,0 +1,54 @@
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ─── Virtual Environments ─────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ─── Environment Variables / Secrets ──────────────────────────────────────────
+.env
+*.env
+*.key
+
+# ─── Outputs (generated at runtime, not source code) ──────────────────────────
+outputs/*.json
+outputs/sample_outputs/
+
+# ─── Streamlit Cache ──────────────────────────────────────────────────────────
+.streamlit/
+
+# ─── Jupyter Notebooks Checkpoints ───────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ─── OS Files ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE / Editor ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user
+
+# ─── Test / Coverage ──────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── Uploaded / Temp Images ───────────────────────────────────────────────────
+data/sample_inputs/*.jpg
+data/sample_inputs/*.jpeg
+data/sample_inputs/*.png
+data/sample_inputs/*.bmp
+data/sample_inputs/*.webp
