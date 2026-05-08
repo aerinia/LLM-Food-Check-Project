@@ -1,0 +1,14 @@
+{
+    "ingredients": "Glikoz şurubu, şeker, su, sığır jelatini, dekstroz, nem verici (sorbitol), aroma verici (çilek), meyve ve bitki konsantreleri (pancar suyu konsantresi, kırmızı biber, elma, domates, aspir), alg.",
+    "vegan": "no",
+    "allergens": ["gelatin"],
+    "explanation": "The product is not vegan because it contains 'sığır jelatini', which is gelatin derived from animal bones/skin.",
+    "reasoning_steps": [
+        "Step 1 — Glikoz şurubu: clearly vegan | şeker: clearly vegan | su: clearly vegan | sığır jelatini: clearly non-vegan (animal-derived) | dekstroz: clearly vegan | sorbitol: clearly vegan | aroma verici (çilek): clearly vegan | meyve ve bitki konsantreleri: clearly vegan | alg: clearly vegan",
+        "Step 2 — Flagged: sığır jelatini (beef gelatin — animal bone/skin derived)",
+        "Step 3 — No problematic E-codes detected",
+        "Step 4 — Product contains beef gelatin. Verdict: NOT vegan"
+    ],
+    "rag_used": true,
+    "note": "Turkish gummy candy label — sığır jelatini (beef gelatin) correctly identified as non-vegan"
+}

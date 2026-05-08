@@ -1,31 +1,48 @@
 """
 LLM Module — Uses Ollama with Llama 3 (local, free) for vegan classification.
-Employs a chain-of-thought (CoT) prompt for explainable, step-by-step reasoning.
+Employs a Chain-of-Thought (CoT) prompt with RAG-retrieved allergen context
+for more accurate and explainable reasoning.
+
+Pipeline:
+    Ingredient Text → RAG Retrieval → Augmented Prompt → Llama 3 → JSON Output
 """
 
 import ollama
 import json
 import re
 
+from .rag_module import retrieve_allergen_context
+
 
 def analyze_ingredients_with_llm(ingredient_text: str, detected_allergens: list) -> dict:
     """
-    Uses local Ollama (llama3) to classify vegan status with chain-of-thought reasoning.
+    Uses local Ollama (llama3) to classify vegan status with:
+    - Chain-of-Thought (CoT) reasoning (4 structured steps)
+    - RAG-retrieved allergen context injected into the prompt
 
     Args:
         ingredient_text: Raw ingredient string from the label.
-        detected_allergens: List of allergen categories already detected by the rule-based system.
+        detected_allergens: List of allergen categories detected by the rule-based system.
 
     Returns:
         dict with keys: vegan, explanation, reasoning_steps
     """
     allergens_str = ", ".join(detected_allergens) if detected_allergens else "None"
 
-    # Chain-of-Thought prompt — forces step-by-step reasoning before final verdict
+    # ── RAG: Retrieve relevant allergen knowledge ─────────────────────────────
+    rag_context = retrieve_allergen_context(ingredient_text, top_k=3)
+    rag_section = ""
+    if rag_context:
+        rag_section = f"""
+RELEVANT ALLERGEN KNOWLEDGE (retrieved from knowledge base):
+{rag_context}
+"""
+
+    # ── Chain-of-Thought Prompt ───────────────────────────────────────────────
     prompt = f"""You are an expert food scientist and vegan certification specialist.
 
 Your task is to analyze the following food ingredient list and determine whether the product is VEGAN.
-
+{rag_section}
 ---
 INGREDIENT LIST:
 {ingredient_text}
@@ -68,7 +85,6 @@ Respond ONLY with this exact JSON structure, nothing else:
         try:
             result_json = json.loads(raw_content)
         except json.JSONDecodeError:
-            # Try to extract JSON block from the response
             match = re.search(r"\{.*\}", raw_content, re.DOTALL)
             if match:
                 result_json = json.loads(match.group())
@@ -78,7 +94,8 @@ Respond ONLY with this exact JSON structure, nothing else:
         return {
             "vegan": str(result_json.get("vegan", "unknown")).lower().strip(),
             "explanation": result_json.get("explanation", "No explanation provided."),
-            "reasoning_steps": result_json.get("reasoning_steps", [])
+            "reasoning_steps": result_json.get("reasoning_steps", []),
+            "rag_used": bool(rag_context)
         }
 
     except Exception as e:
@@ -86,5 +103,6 @@ Respond ONLY with this exact JSON structure, nothing else:
         return {
             "vegan": "error",
             "explanation": f"LLM could not be reached or returned invalid output: {str(e)}",
-            "reasoning_steps": []
+            "reasoning_steps": [],
+            "rag_used": False
         }

@@ -84,8 +84,11 @@ ALLERGEN_DB = {
     "gelatin": [
         # English
         "gelatin", "gelatine", "collagen",
-        # Turkish
+        # Turkish — simple and compound forms
         "jelatin",
+        "sığır jelatini",   # beef gelatin
+        "domuz jelatini",   # pork gelatin
+        "balık jelatini",   # fish gelatin
         # E-codes
         "e441",   # Gelatin
         "e542",   # Bone phosphate (edible bone phosphate — animal origin)
